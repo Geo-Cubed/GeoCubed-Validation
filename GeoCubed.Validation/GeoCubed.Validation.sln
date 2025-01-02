@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoCubed.Validation", "GeoCubed.Validation\GeoCubed.Validation.csproj", "{89259815-02F8-413E-BC64-DF289E8F3059}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoCubed.Validation.Test", "GeoCubed.Validation.Test\GeoCubed.Validation.Test.csproj", "{354A47D4-C085-4D7F-923A-B9C4781BF0DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89259815-02F8-413E-BC64-DF289E8F3059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89259815-02F8-413E-BC64-DF289E8F3059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89259815-02F8-413E-BC64-DF289E8F3059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89259815-02F8-413E-BC64-DF289E8F3059}.Release|Any CPU.Build.0 = Release|Any CPU
+		{354A47D4-C085-4D7F-923A-B9C4781BF0DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{354A47D4-C085-4D7F-923A-B9C4781BF0DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{354A47D4-C085-4D7F-923A-B9C4781BF0DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{354A47D4-C085-4D7F-923A-B9C4781BF0DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
