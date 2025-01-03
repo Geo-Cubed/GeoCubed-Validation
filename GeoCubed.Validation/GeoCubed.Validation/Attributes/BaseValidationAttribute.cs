@@ -17,13 +17,6 @@ public abstract class BaseValidationAttribute : Attribute
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="BaseValidationAttribute"/> class.
-    /// </summary>
-    protected BaseValidationAttribute()
-    {
-    }
-
-    /// <summary>
     /// Abstract method to check if the value provided is valid.
     /// </summary>
     /// <param name="value">The value to check.</param>

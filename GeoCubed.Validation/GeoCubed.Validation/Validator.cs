@@ -1,4 +1,7 @@
-﻿namespace GeoCubed.Validation;
+﻿using GeoCubed.Validation.Attributes;
+using System.Reflection;
+
+namespace GeoCubed.Validation;
 
 /// <summary>
 /// Validation class for running the validation on an object.
@@ -12,17 +15,49 @@ public sealed class Validator
     /// <returns>The result of the validation.</returns>
     public static ValidationResult Validate(object obj)
     {
-        // TODO: validate an object passed to it and return a object representing the result.
-        var result = ValidationResult.Success;
+        var validationResult = ValidationResult.Success;
 
-        // 1. Loop through object.
+        // Get the properties of the object.
+        var properties = obj.GetType().GetProperties().AsSpan();
+        for (var i = 0; i < properties.Length; ++i)
+        {
+            ValidateProperty(properties[i], obj, validationResult);
+        }
 
-        // 2. If property has validation attribute.
+        // TODO: Validate fields?
 
-        // 3. Run validation.
+        return validationResult;
+    }
 
-        // 4. If there are errors then add the messages + property name to result.Errors.
+    private static void ValidateProperty(PropertyInfo property, object obj, ValidationResult validationResult)
+    {
+        // Get the validation attributes from the property.
+        var validationAttributes = property.GetCustomAttributes(typeof(BaseValidationAttribute), true);
+        if (validationAttributes != null && validationAttributes.Length > 0)
+        {
+            var value = property.GetValue(obj);
 
-        return result;
+            // Loop through the validation attributes on the property.
+            for (int j = 0; j < validationAttributes.Length; ++j)
+            {
+                var attribute = validationAttributes[j] as BaseValidationAttribute;
+                if (attribute != null)
+                {
+                    RunValidation(attribute, property, obj, value, validationResult);
+                }
+            }
+        }
+    }
+
+    private static void RunValidation(BaseValidationAttribute attribute, PropertyInfo property, object obj, object? value, ValidationResult validationResult)
+    {
+        // Run the validation.
+        var result = attribute?.IsValid(value);
+        if (result == false && attribute != null)
+        {
+            // On validation error set the errors flag and add error message.
+            validationResult.HasErrors |= true;
+            validationResult.Errors.Add((property.Name, attribute.ConstructErrorMessage(property.Name)));
+        }
     }
 }

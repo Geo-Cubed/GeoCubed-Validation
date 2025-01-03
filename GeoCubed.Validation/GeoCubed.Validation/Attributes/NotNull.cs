@@ -6,21 +6,23 @@ namespace GeoCubed.Validation;
 /// Required validation attribute class. This will check if an object is not null (or empty in case of string).
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-public sealed class Required : BaseValidationAttribute
+public sealed class NotNull : BaseValidationAttribute
 {
+    private const string _defaultErrorMessage = "";
+
     /// <summary>
-    /// Initializes a new instance of the <see cref="Required"/> class.
+    /// Initializes a new instance of the <see cref="NotNull"/> class.
     /// </summary>
-    public Required()
-        : base()
+    public NotNull()
+        : base(_defaultErrorMessage)
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Required"/> class.
+    /// Initializes a new instance of the <see cref="NotNull"/> class.
     /// </summary>
     /// <param name="errorMessage">The error message for the validation.</param>
-    public Required(string errorMessage)
+    public NotNull(string errorMessage)
         : base(errorMessage)
     {
     }
@@ -32,21 +34,17 @@ public sealed class Required : BaseValidationAttribute
     /// <returns>True if valid, False otherwise.</returns>
     public override bool IsValid(object value)
     {
-        if (value.GetType() == typeof(string))
+        if (value == null)
         {
-            return string.IsNullOrEmpty(value as string);
+            return false;
         }
 
-        return value != null;
-    }
+        var convertedValue = value as string;
+        if (convertedValue != null)
+        {
+            return !string.IsNullOrEmpty(convertedValue);
+        }
 
-    /// <summary>
-    /// Constructs the error message to use on validation fail.
-    /// </summary>
-    /// <param name="name">The name of the parameter.</param>
-    /// <returns>The error message.</returns>
-    public override string ConstructErrorMessage(string name)
-    {
-        return base.ConstructErrorMessage(name);
+        return true;
     }
 }
