@@ -8,7 +8,7 @@ namespace GeoCubed.Validation.Attributes;
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class Minimum : BaseValidationAttribute
 {
-    private const string _defaultErrorMessage = "";
+    private const string _defaultErrorMessage = "The value was less than the minimum value.";
 
     private readonly string _minimumValue;
 
