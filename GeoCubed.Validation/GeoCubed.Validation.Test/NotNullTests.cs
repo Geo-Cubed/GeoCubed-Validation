@@ -3,7 +3,7 @@ using GeoCubed.Validation.Test.Models.NotNullTestModels;
 namespace GeoCubed.Validation.Test;
 
 /// <summary>
-/// Test class for testing the required validation attribute.
+/// Tests for the <see cref="NotNull"/> validation attribute.
 /// </summary>
 public class NotNullTests
 {

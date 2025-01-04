@@ -1,5 +1,10 @@
-﻿namespace GeoCubed.Validation.Test;
+﻿using GeoCubed.Validation.Attributes;
 
+namespace GeoCubed.Validation.Test;
+
+/// <summary>
+/// Tests for the <see cref="Minimum"/> validation attribute.
+/// </summary>
 public class MinimumTests
 {
     [Fact]
