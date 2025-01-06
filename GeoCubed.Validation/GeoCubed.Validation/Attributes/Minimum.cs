@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using GeoCubed.Validation.Attributes.Common;
+using System.ComponentModel;
 
 namespace GeoCubed.Validation.Attributes;
 
@@ -45,19 +46,27 @@ public class Minimum : BaseValidationAttribute
             return true;
         }
 
-        // TODO: Error handling.
         var objType = value.GetType();
-        var converter = TypeDescriptor.GetConverter(objType); // TODO: See what's better to use this or Convert.ChangeType.
-        if (converter == null)
+
+        // Fetch the converter for the object type.
+        TypeConverter converter;
+        try
         {
-            // Cannot find the type converter.
+            converter = AttributeHelper.GetConverter(objType);
+        }
+        catch
+        {
             return false;
         }
 
-        var comparer = (IComparable)converter.ConvertFromString(this._minimumValue);
-        if (comparer == null)
+        // Fetch the converter for the object type.
+        IComparable comparer;
+        try
         {
-            // The value of minimum is null when converted.
+            comparer = AttributeHelper.GetComparer(converter, this._minimumValue);
+        }
+        catch
+        {
             return false;
         }
 

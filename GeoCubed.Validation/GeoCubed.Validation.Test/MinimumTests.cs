@@ -35,7 +35,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -50,7 +50,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -86,7 +86,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -116,7 +116,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -146,7 +146,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -176,7 +176,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -206,7 +206,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -236,7 +236,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -266,7 +266,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -296,7 +296,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -326,7 +326,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -352,11 +352,11 @@ public class MinimumTests
     {
         var model = new MinimumTestFloatDecimal()
         {
-            Value = 2.3f,
+            Value = 2.2f,
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -367,7 +367,7 @@ public class MinimumTests
     {
         var model = new MinimumTestFloatDecimal()
         {
-            Value = 2.1f,
+            Value = 2.199f,
         };
 
         var validation = Validator.Validate(model);
@@ -386,7 +386,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -416,7 +416,7 @@ public class MinimumTests
         };
 
         var validation = Validator.Validate(model);
-        Assert.False(validation.HasErrors);
+        this.ValidatePass(validation);
     }
     
     /// <summary>
@@ -442,5 +442,11 @@ public class MinimumTests
         var error = result.Errors[0];
         Assert.Equal("Validation Error on: Value | The value was less than the minimum value.", error.errorMessage);
         Assert.Equal("Value", error.property);
+    }
+
+    private void ValidatePass(ValidationResult result)
+    {
+        Assert.False(result.HasErrors);
+        Assert.Empty(result.Errors);
     }
 }
