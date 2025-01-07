@@ -32,7 +32,7 @@ public class Within : BaseValidationAttribute
     /// <param name="maximumValue">The maximum value expressed as a string.</param>
     /// <param name="errorMessage">The error message to use on fail.</param>
     public Within(string minimumValue, string maximumValue, string errorMessage)
-        : base(_defaultErrorMessage)
+        : base(errorMessage)
     {
         this._minimumValue = minimumValue;
         this._maximumValue = maximumValue;
