@@ -1,4 +1,6 @@
-﻿namespace GeoCubed.Validation.Attributes;
+﻿using System.Collections;
+
+namespace GeoCubed.Validation.Attributes;
 
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class MinimumLength : BaseValidationAttribute
@@ -17,6 +19,23 @@ public class MinimumLength : BaseValidationAttribute
 
     public override bool IsValid(object value)
     {
-        throw new NotImplementedException();
+        var span = new Span<string>();
+        var objType = value.GetType();
+
+        if (objType == typeof(string))
+        {
+            // Strings.
+        }
+        else if (typeof(IEnumerable).IsAssignableFrom(objType))
+        {
+            // List . enymerable
+        }
+        else if (objType.IsArray)
+        {
+            // Arrays
+        }
+
+        // Dictionaries?
+
     }
 }
