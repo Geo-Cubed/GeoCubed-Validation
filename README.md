@@ -1,6 +1,6 @@
 # GeoCubed Validation
 
-This is a validation library I wrote based on the System.ComponentModel.DataAnnotations valideion. The validation is done by specifying attributes on models which then is checked by a validator. This library currently only supports property validation but I may look into other thing in the future.
+This is a validation library I wrote based on the System.ComponentModel.DataAnnotations validation. The validation is done by specifying attributes on models which then is checked by a validator. This library currently only supports property validation but I may look into other thing in the future.
 
 ## Quick Start
 
