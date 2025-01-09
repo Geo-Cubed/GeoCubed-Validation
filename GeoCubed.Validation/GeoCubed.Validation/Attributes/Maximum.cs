@@ -17,8 +17,11 @@ public class Maximum : BaseValidationAttribute
     /// Initializes a new instance of the <see cref="Maximum"/> class.
     /// </summary>
     /// <param name="maximumValue">The maximum value expressed as a string.</param>
-    public Maximum(string maximumValue) : base(_defaultErrorMessage)
+    public Maximum(string maximumValue)
+        : base(_defaultErrorMessage)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(maximumValue);
+
          this._maximumValue = maximumValue;
     }
 
@@ -30,6 +33,9 @@ public class Maximum : BaseValidationAttribute
     public Maximum(string maximumValue, string errorMessage)
         : base(errorMessage)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(maximumValue);
+        ArgumentException.ThrowIfNullOrWhiteSpace(errorMessage);
+
         this._maximumValue = maximumValue;
     }
 

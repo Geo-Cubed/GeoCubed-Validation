@@ -20,6 +20,8 @@ public class Minimum : BaseValidationAttribute
     public Minimum(string minimumValue)
         : base(_defaultErrorMessage)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(minimumValue);
+
         this._minimumValue = minimumValue;
     }
 
@@ -31,6 +33,9 @@ public class Minimum : BaseValidationAttribute
     public Minimum(string minimumValue, string errorMessage)
         : base(errorMessage)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(minimumValue);
+        ArgumentException.ThrowIfNullOrWhiteSpace(errorMessage);
+
         this._minimumValue = minimumValue;
     }
 

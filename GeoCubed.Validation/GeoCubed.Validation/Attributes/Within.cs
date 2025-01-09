@@ -21,6 +21,9 @@ public class Within : BaseValidationAttribute
     public Within(string minimumValue, string maximumValue)
         : base(_defaultErrorMessage)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(minimumValue);
+        ArgumentException.ThrowIfNullOrWhiteSpace(maximumValue);
+
         this._minimumValue = minimumValue;
         this._maximumValue = maximumValue;
     }
@@ -34,6 +37,10 @@ public class Within : BaseValidationAttribute
     public Within(string minimumValue, string maximumValue, string errorMessage)
         : base(errorMessage)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(minimumValue);
+        ArgumentException.ThrowIfNullOrWhiteSpace(maximumValue);
+        ArgumentException.ThrowIfNullOrWhiteSpace(errorMessage);
+
         this._minimumValue = minimumValue;
         this._maximumValue = maximumValue;
     }

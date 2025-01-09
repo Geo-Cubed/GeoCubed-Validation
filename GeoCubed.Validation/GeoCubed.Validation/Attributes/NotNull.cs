@@ -25,6 +25,7 @@ public sealed class NotNull : BaseValidationAttribute
     public NotNull(string errorMessage)
         : base(errorMessage)
     {
+        ArgumentException.ThrowIfNullOrWhiteSpace(errorMessage);
     }
 
     /// <summary>

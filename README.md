@@ -9,9 +9,9 @@ NotNull - done
 Maximum - done
 Minimum - done
 Within - done
-MaximumLength - in progress
-MinimumLength - in progress
-WithinLength - in progress
+MaximumLength - code done, needs testing
+MinimumLength - code done, needs testing
+WithinLength - code done, needs testing
 IsType 
 ValidateViaMethod
 Contains?

@@ -6,7 +6,7 @@ namespace GeoCubed.Validation;
 /// <summary>
 /// Validation class for running the validation on an object.
 /// </summary>
-public sealed class Validator
+public static class Validator
 {
     /// <summary>
     /// Validates an object.
