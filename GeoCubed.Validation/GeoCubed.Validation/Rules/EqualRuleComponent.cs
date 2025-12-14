@@ -21,7 +21,7 @@ public sealed class EqualRuleComponent<TModel, TProperty> : BaseRuleComponent<TP
 
         if (null == value && null != _expectedValue || null != value && null == _expectedValue || !_expectedValue.Equals(value))
         {
-            context.AddFailiure(PropertyName, ContructErrorMessage(value));
+            context.AddFailiure(PropertyName, ConstructErrorMessage(value));
         }
     }
 }

@@ -16,7 +16,7 @@ public class BaseRuleComponent<TProperty>
         ErrorMessage = message;
     }
 
-    protected virtual string ContructErrorMessage(TProperty propertyValue)
+    protected virtual string ConstructErrorMessage(TProperty propertyValue)
     {
         // TODO: Do this better.
         return ErrorMessage.Replace("{PROPERTY}", PropertyName).Replace("{VALUE}", propertyValue.ToString());

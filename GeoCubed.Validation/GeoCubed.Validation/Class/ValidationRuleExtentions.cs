@@ -9,10 +9,7 @@ public static class ValidationRuleExtentions
         ArgumentNullException.ThrowIfNull(rule);
 
         var equalityRule = new EqualRuleComponent<TModel, TProperty>(expectedValue, rule.MemberName);
-        if (!string.IsNullOrEmpty(errorMessage))
-        {
-            equalityRule.SetErrorMessage(errorMessage);
-        }
+        AttachErrorMessage(equalityRule, errorMessage);
 
         rule.AddComponent(equalityRule);
 
@@ -24,7 +21,30 @@ public static class ValidationRuleExtentions
         ArgumentNullException.ThrowIfNull(rule);
 
         var greaterThanRule = new GreaterThanRule<TModel, TProperty>(minimum.ToString(), rule.MemberName);
+        AttachErrorMessage(greaterThanRule, errorMessage);
+
+        rule.AddComponent(greaterThanRule);
+
+        return rule;
     }
 
-    private static void AttachErrorMessage(this IRuleComponent<TModel, TProperty> ruleCompostring errorMessage)
+    public static ValidationRule<TModel, TProperty> LessThan<TModel, TProperty>(this ValidationRule<TModel, TProperty> rule, TProperty maximum, string errorMessage = "") where TModel : class
+    {
+        ArgumentNullException.ThrowIfNull(rule);
+
+        var lessThanRule = new LessThanRule<TModel, TProperty>(maximum.ToString(), rule.MemberName);
+        AttachErrorMessage(lessThanRule, errorMessage);
+
+        rule.AddComponent(lessThanRule);
+
+        return rule;
+    }
+
+    private static void AttachErrorMessage<TModel, TProperty>(this IRuleComponent<TModel, TProperty> ruleComponent, string errorMessage) where TModel : class
+    {
+        if (!string.IsNullOrEmpty(errorMessage))
+        {
+            ruleComponent.SetErrorMessage(errorMessage);
+        }
+    }
 }

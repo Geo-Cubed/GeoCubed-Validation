@@ -4,19 +4,19 @@ using System.ComponentModel;
 
 namespace GeoCubed.Validation.Rules;
 
-public sealed class GreaterThanRule<TModel, TProperty> : BaseRuleComponent<TProperty>, IRuleComponent<TModel, TProperty> where TModel : class
+public class LessThanRule<TModel, TProperty> : BaseRuleComponent<TProperty>, IRuleComponent<TModel, TProperty> where TModel : class
 {
-    private const string DEFAULT_ERROR = "{PROPERTY} is not greater than {VALUE}";
-    private readonly string _minimumValue;
+    private const string DEFAULT_ERROR = "{PROPERTY} is not less than {VALUE}";
+    private readonly string _maximumValue;
 
-    public GreaterThanRule(string minimumValue, string propertyName) : base(propertyName, DEFAULT_ERROR)
+    public LessThanRule(string maximumValue, string propertyName) : base(maximumValue, DEFAULT_ERROR)
     {
-        this._minimumValue = minimumValue;
+        this._maximumValue = maximumValue;
     }
 
     public void IsValid(TProperty value, ValidationContext<TModel> context)
     {
-        if (value != null && !this.CheckGreaterThan(value))
+        if (!this.CheckGreaterThan(value))
         {
             context.AddFailiure(this.PropertyName, this.ConstructErrorMessage(value));
         }
@@ -24,6 +24,11 @@ public sealed class GreaterThanRule<TModel, TProperty> : BaseRuleComponent<TProp
 
     private bool CheckGreaterThan(TProperty value)
     {
+        if (value == null)
+        {
+            return true;
+        }
+
         var objType = value.GetType();
 
         // Fetch the converter for the object type.
@@ -34,21 +39,20 @@ public sealed class GreaterThanRule<TModel, TProperty> : BaseRuleComponent<TProp
         }
         catch
         {
-
             return false;
         }
 
-        // Fetch the converter for the object type.
+        // Fetch the comparer for the object type.
         IComparable comparer;
         try
         {
-            comparer = AttributeHelper.GetComparer(converter, this._minimumValue);
+            comparer = AttributeHelper.GetComparer(converter, this._maximumValue);
         }
         catch
         {
             return false;
         }
 
-        return comparer.CompareTo(value) <= 0;
+        return comparer.CompareTo(value) >= 0;
     }
 }
