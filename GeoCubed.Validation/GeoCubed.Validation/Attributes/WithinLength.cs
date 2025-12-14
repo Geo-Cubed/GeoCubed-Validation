@@ -1,4 +1,6 @@
-﻿namespace GeoCubed.Validation.Attributes;
+﻿using System.Collections;
+
+namespace GeoCubed.Validation.Attributes;
 
 /// <summary>
 /// Validate that the length of a value is within a range.
@@ -6,7 +8,7 @@
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class WithinLength : BaseValidationAttribute
 {
-    private const string _defaultErrorMessage = "";
+    private const string _defaultErrorMessage = "The length is not between the minimum and maximum values.";
 
     private readonly int _minimumLength;
     private readonly int _maximumLength;
@@ -63,7 +65,7 @@ public class WithinLength : BaseValidationAttribute
         }
         else
         {
-            length = ((Array)value).Length;
+            length = (value as IEnumerable).Cast<object>().Count();
         }
 
         return length >= this._minimumLength && length <= this._maximumLength;

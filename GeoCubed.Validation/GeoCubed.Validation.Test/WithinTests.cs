@@ -1,4 +1,5 @@
 ﻿using GeoCubed.Validation.Attributes;
+using GeoCubed.Validation.Test.Helpers;
 using GeoCubed.Validation.Test.Models.WithinTestModels;
 
 namespace GeoCubed.Validation.Test;
@@ -8,6 +9,11 @@ namespace GeoCubed.Validation.Test;
 /// </summary>
 public class WithinTests
 {
+    public WithinTests()
+    {
+        TestValidationHelper.SetDefualtErrorMessage("The value was not within the range provided.");
+    }
+
     /// <summary>
     /// Test validation fail on value less than the range.
     /// </summary>
@@ -19,8 +25,8 @@ public class WithinTests
             ValueInt = 0,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidateFail(result, "ValueInt");
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(result, nameof(model.ValueInt));
     }
 
     /// <summary>
@@ -34,8 +40,8 @@ public class WithinTests
             ValueInt = 1,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidatePass(result);
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(result);
     }
     
     /// <summary>
@@ -49,8 +55,8 @@ public class WithinTests
             ValueInt = 10,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidatePass(result);
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(result);
     }
     
     /// <summary>
@@ -64,8 +70,8 @@ public class WithinTests
             ValueInt = 100,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidatePass(result);
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(result);
     }
 
     /// <summary>
@@ -79,8 +85,8 @@ public class WithinTests
             ValueInt = 101,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidateFail(result, "ValueInt");
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(result, nameof(model.ValueInt));
     }
 
     /// <summary>
@@ -94,13 +100,13 @@ public class WithinTests
             ErrorMessage = 0,
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
         Assert.True(result.HasErrors);
         Assert.NotEmpty(result.Errors);
 
         var error = result.Errors[0];
-        Assert.Equal($"Validation Error on: ErrorMessage | Test", error.errorMessage);
-        Assert.Equal("ErrorMessage", error.property);
+        Assert.Equal($"Validation Error on: ErrorMessage | Test", error.Message);
+        Assert.Equal("ErrorMessage", error.Property);
     }
 
     /// <summary>
@@ -114,8 +120,8 @@ public class WithinTests
             ValueDecimal = 2.1m,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidateFail(result, "ValueDecimal");
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(result, nameof(model.ValueDecimal));
     }
     
     /// <summary>
@@ -129,8 +135,8 @@ public class WithinTests
             ValueDecimal = 2.2m,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidatePass(result);
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(result);
     }
 
     /// <summary>
@@ -144,8 +150,8 @@ public class WithinTests
             ValueDecimal = 5m,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidatePass(result);
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(result);
     }
     
     /// <summary>
@@ -159,8 +165,8 @@ public class WithinTests
             ValueDecimal = 10.0m,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidatePass(result);
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(result);
     }
 
     /// <summary>
@@ -174,23 +180,7 @@ public class WithinTests
             ValueDecimal = 10.1m,
         };
 
-        var result = Validator.Validate(model);
-        this.ValidateFail(result, "ValueDecimal");
-    }
-
-    private void ValidatePass(ValidationResult result)
-    {
-        Assert.False(result.HasErrors);
-        Assert.Empty(result.Errors);
-    }
-
-    private void ValidateFail(ValidationResult result, string propertyName)
-    {
-        Assert.True(result.HasErrors);
-        Assert.NotEmpty(result.Errors);
-
-        var error = result.Errors[0];
-        Assert.Equal($"Validation Error on: {propertyName} | The value was not within the range provided.", error.errorMessage);
-        Assert.Equal(propertyName, error.property);
+        var result = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(result, nameof(model.ValueDecimal));
     }
 }

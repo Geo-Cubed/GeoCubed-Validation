@@ -1,4 +1,6 @@
-﻿namespace GeoCubed.Validation.Attributes;
+﻿using System.Collections;
+
+namespace GeoCubed.Validation.Attributes;
 
 /// <summary>
 /// Maximum length attribute for checking if a string or list / array is at maximum in length this value.
@@ -6,7 +8,7 @@
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class MaximumLength : BaseValidationAttribute
 {
-    private const string _defaultErrorMessage = "";
+    private const string _defaultErrorMessage = "The length was greater than the maximum value.";
 
     private readonly int _maximumLength;
 
@@ -56,7 +58,7 @@ public class MaximumLength : BaseValidationAttribute
         }
         else
         {
-            length = ((Array)value).Length;
+            length = (value as IEnumerable).Cast<object>().Count();
         }
 
         return length <= this._maximumLength;

@@ -1,3 +1,4 @@
+using GeoCubed.Validation.Test.Helpers;
 using GeoCubed.Validation.Test.Models.NotNullTestModels;
 
 namespace GeoCubed.Validation.Test;
@@ -7,6 +8,11 @@ namespace GeoCubed.Validation.Test;
 /// </summary>
 public class NotNullTests
 {
+    public NotNullTests()
+    {
+        TestValidationHelper.SetDefualtErrorMessage("The value was null.");    
+    }
+
     /// <summary>
     /// Test validation fail on nullable property being null.
     /// </summary>
@@ -18,13 +24,9 @@ public class NotNullTests
             Value = null,
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
-        Assert.True(result.HasErrors);
-
-        var error = result.Errors[0];
-        Assert.Equal("Value", error.property);
-        Assert.Equal("Validation Error on: Value | ", error.errorMessage);
+        TestValidationHelper.ValidateFail(result, nameof(model.Value));
     }
 
     /// <summary>
@@ -35,13 +37,9 @@ public class NotNullTests
     {
         var model = new NotNullTestString();
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
-        Assert.True(result.HasErrors);
-
-        var error = result.Errors[0];
-        Assert.Equal("Value", error.property);
-        Assert.Equal("Validation Error on: Value | ", error.errorMessage);
+        TestValidationHelper.ValidateFail(result, nameof(model.Value));
     }
 
     /// <summary>
@@ -55,13 +53,9 @@ public class NotNullTests
             Value = string.Empty,
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
-        Assert.True(result.HasErrors);
-
-        var error = result.Errors[0];
-        Assert.Equal("Value", error.property);
-        Assert.Equal("Validation Error on: Value | ", error.errorMessage);
+        TestValidationHelper.ValidateFail(result, nameof(model.Value));
     }
 
     /// <summary>
@@ -75,9 +69,9 @@ public class NotNullTests
             Value = 1,
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
-        Assert.False(result.HasErrors);
+        TestValidationHelper.ValidatePass(result);
     }
 
     /// <summary>
@@ -91,9 +85,9 @@ public class NotNullTests
             Value = "Test",
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
-        Assert.False(result.HasErrors);
+        TestValidationHelper.ValidatePass(result);
     }
 
     /// <summary>
@@ -107,13 +101,13 @@ public class NotNullTests
             Value = null,
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
         Assert.True(result.HasErrors);
 
         var error = result.Errors[0];
-        Assert.Equal("Value", error.property);
-        Assert.Equal("Validation Error on: Value | Testing", error.errorMessage);
+        Assert.Equal("Value", error.Property);
+        Assert.Equal("Validation Error on: Value | Testing", error.Message);
     }
 
     /// <summary>
@@ -128,7 +122,7 @@ public class NotNullTests
             Value2 = null,
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
         Assert.True(result.HasErrors);
         Assert.True(result.Errors.Count == 2);
@@ -146,7 +140,7 @@ public class NotNullTests
             Value2 = 1,
         };
 
-        var result = Validator.Validate(model);
+        var result = AttributeValidator.Validate(model);
 
         Assert.True(result.HasErrors);
         Assert.True(result.Errors.Count == 1);

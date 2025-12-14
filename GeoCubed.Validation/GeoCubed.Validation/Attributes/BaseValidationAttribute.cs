@@ -1,4 +1,6 @@
-﻿namespace GeoCubed.Validation.Attributes;
+﻿using GeoCubed.Validation.Rules;
+
+namespace GeoCubed.Validation.Attributes;
 
 /// <summary>
 /// Base validation attribute that all attributes should inherit from.

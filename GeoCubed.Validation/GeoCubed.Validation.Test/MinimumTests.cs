@@ -1,4 +1,5 @@
 ﻿using GeoCubed.Validation.Attributes;
+using GeoCubed.Validation.Test.Helpers;
 using GeoCubed.Validation.Test.Models.MinimumTestModels;
 
 namespace GeoCubed.Validation.Test;
@@ -8,6 +9,11 @@ namespace GeoCubed.Validation.Test;
 /// </summary>
 public class MinimumTests
 {
+    public MinimumTests()
+    {
+        TestValidationHelper.SetDefualtErrorMessage("The value was less than the minimum value.");
+    }
+
     /// <summary>
     /// Test correct validation when value less than minimum.
     /// </summary>
@@ -19,8 +25,8 @@ public class MinimumTests
             Value = int.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -34,8 +40,8 @@ public class MinimumTests
             Value = 0,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -49,8 +55,8 @@ public class MinimumTests
             Value = int.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -64,14 +70,14 @@ public class MinimumTests
             Value = 1,
         };
 
-        var validation = Validator.Validate(model);
+        var validation = AttributeValidator.Validate(model);
 
         Assert.True(validation.HasErrors);
         Assert.NotEmpty(validation.Errors);
 
         var error = validation.Errors[0];
-        Assert.Equal("Validation Error on: Value | Test", error.errorMessage);
-        Assert.Equal("Value", error.property);
+        Assert.Equal("Validation Error on: Value | Test", error.Message);
+        Assert.Equal("Value", error.Property);
     }
 
     /// <summary>
@@ -85,8 +91,8 @@ public class MinimumTests
             Value = sbyte.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -100,8 +106,8 @@ public class MinimumTests
             Value = sbyte.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -115,8 +121,8 @@ public class MinimumTests
             Value = byte.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -130,8 +136,8 @@ public class MinimumTests
             Value = byte.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -145,8 +151,8 @@ public class MinimumTests
             Value = short.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -160,8 +166,8 @@ public class MinimumTests
             Value = short.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -175,8 +181,8 @@ public class MinimumTests
             Value = ushort.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -190,8 +196,8 @@ public class MinimumTests
             Value = ushort.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -205,8 +211,8 @@ public class MinimumTests
             Value = int.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -220,8 +226,8 @@ public class MinimumTests
             Value = int.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -235,8 +241,8 @@ public class MinimumTests
             Value = uint.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -250,8 +256,8 @@ public class MinimumTests
             Value = uint.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -265,8 +271,8 @@ public class MinimumTests
             Value = long.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -280,8 +286,8 @@ public class MinimumTests
             Value = long.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -295,8 +301,8 @@ public class MinimumTests
             Value = ulong.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -310,8 +316,8 @@ public class MinimumTests
             Value = ulong.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -325,8 +331,8 @@ public class MinimumTests
             Value = float.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -340,8 +346,8 @@ public class MinimumTests
             Value = float.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
 
     /// <summary>
@@ -355,8 +361,8 @@ public class MinimumTests
             Value = 2.2f,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -370,8 +376,8 @@ public class MinimumTests
             Value = 2.199f,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -385,8 +391,8 @@ public class MinimumTests
             Value = double.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -400,8 +406,8 @@ public class MinimumTests
             Value = double.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
     
     /// <summary>
@@ -415,8 +421,8 @@ public class MinimumTests
             Value = decimal.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     /// <summary>
@@ -430,23 +436,7 @@ public class MinimumTests
             Value = decimal.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation);
-    }
-
-    private void ValidateFail(ValidationResult result)
-    {
-        Assert.True(result.HasErrors);
-        Assert.NotEmpty(result.Errors);
-
-        var error = result.Errors[0];
-        Assert.Equal("Validation Error on: Value | The value was less than the minimum value.", error.errorMessage);
-        Assert.Equal("Value", error.property);
-    }
-
-    private void ValidatePass(ValidationResult result)
-    {
-        Assert.False(result.HasErrors);
-        Assert.Empty(result.Errors);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, nameof(model.Value));
     }
 }

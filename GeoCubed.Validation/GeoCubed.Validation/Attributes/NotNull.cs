@@ -8,7 +8,7 @@ namespace GeoCubed.Validation;
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public sealed class NotNull : BaseValidationAttribute
 {
-    private const string _defaultErrorMessage = "";
+    private const string _defaultErrorMessage = "The value was null.";
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NotNull"/> class.

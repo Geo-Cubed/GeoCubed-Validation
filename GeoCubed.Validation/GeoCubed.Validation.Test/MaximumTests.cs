@@ -1,9 +1,15 @@
-﻿using GeoCubed.Validation.Test.Models.MaximumTestModels;
+﻿using GeoCubed.Validation.Test.Helpers;
+using GeoCubed.Validation.Test.Models.MaximumTestModels;
 
 namespace GeoCubed.Validation.Test;
 
 public class MaximumTests
 {
+    public MaximumTests()
+    {
+        TestValidationHelper.SetDefualtErrorMessage("The value was more than the maximum value.");    
+    }
+
     [Fact]
     public void TestMaximumValueLess()
     {
@@ -12,8 +18,8 @@ public class MaximumTests
             ValueInt = int.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
 
     [Fact]
@@ -24,8 +30,8 @@ public class MaximumTests
             ValueInt = 0,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
 
     [Fact]
@@ -36,8 +42,8 @@ public class MaximumTests
             ValueInt = int.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueInt");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueInt");
     }
 
     [Fact]
@@ -48,14 +54,14 @@ public class MaximumTests
             ValueError = int.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
+        var validation = AttributeValidator.Validate(model);
 
         Assert.True(validation.HasErrors);
         Assert.NotEmpty(validation.Errors);
 
         var error = validation.Errors[0];
-        Assert.Equal("Validation Error on: ValueError | Test", error.errorMessage);
-        Assert.Equal("ValueError", error.property);
+        Assert.Equal("Validation Error on: ValueError | Test", error.Message);
+        Assert.Equal("ValueError", error.Property);
     }
 
     [Fact]
@@ -66,8 +72,8 @@ public class MaximumTests
             ValueSByte = sbyte.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -78,8 +84,8 @@ public class MaximumTests
             ValueSByte = sbyte.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueSByte");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueSByte");
     }
     
     [Fact]
@@ -90,8 +96,8 @@ public class MaximumTests
             ValueByte = byte.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -102,8 +108,8 @@ public class MaximumTests
             ValueByte = byte.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueByte");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueByte");
     }
     
     [Fact]
@@ -114,8 +120,8 @@ public class MaximumTests
             ValueShort = short.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -126,8 +132,8 @@ public class MaximumTests
             ValueShort = short.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueShort");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueShort");
     }
     
     [Fact]
@@ -138,8 +144,8 @@ public class MaximumTests
             ValueUShort = ushort.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -150,8 +156,8 @@ public class MaximumTests
             ValueUShort = ushort.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueUShort");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueUShort");
     }
     
     [Fact]
@@ -162,8 +168,8 @@ public class MaximumTests
             ValueInt = int.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -174,8 +180,8 @@ public class MaximumTests
             ValueInt = int.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueInt");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueInt");
     }
     
     [Fact]
@@ -186,8 +192,8 @@ public class MaximumTests
             ValueUInt = uint.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -198,8 +204,8 @@ public class MaximumTests
             ValueUInt = uint.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueUInt");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueUInt");
     }
     
     [Fact]
@@ -210,8 +216,8 @@ public class MaximumTests
             ValueLong = long.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -222,8 +228,8 @@ public class MaximumTests
             ValueLong = long.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueLong");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueLong");
     }
     
     [Fact]
@@ -234,8 +240,8 @@ public class MaximumTests
             ValueULong = ulong.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -246,8 +252,8 @@ public class MaximumTests
             ValueULong = ulong.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueULong");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueULong");
     }
     
     [Fact]
@@ -258,8 +264,8 @@ public class MaximumTests
             ValueFloat = float.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
     
     [Fact]
@@ -270,8 +276,8 @@ public class MaximumTests
             ValueFloat = float.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueFloat");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueFloat");
     }
 
     [Fact]
@@ -282,8 +288,8 @@ public class MaximumTests
             ValueFloatDecimal = 2.2f,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
 
     [Fact]
@@ -294,8 +300,8 @@ public class MaximumTests
             ValueFloatDecimal = 2.201f,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueFloatDecimal");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueFloatDecimal");
     }
     
     [Fact]
@@ -306,8 +312,8 @@ public class MaximumTests
             ValueDouble = double.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
 
     [Fact]
@@ -318,8 +324,8 @@ public class MaximumTests
             ValueDouble = double.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueDouble");
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueDouble");
     }
     
     [Fact]
@@ -330,8 +336,8 @@ public class MaximumTests
             ValueDecimal = decimal.MinValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidatePass(validation);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidatePass(validation);
     }
 
     [Fact]
@@ -342,23 +348,7 @@ public class MaximumTests
             ValueDecimal = decimal.MaxValue,
         };
 
-        var validation = Validator.Validate(model);
-        this.ValidateFail(validation, "ValueDecimal");
-    }
-
-    private void ValidateFail(ValidationResult result, string propertyName)
-    {
-        Assert.True(result.HasErrors);
-        Assert.NotEmpty(result.Errors);
-
-        var error = result.Errors[0];
-        Assert.Equal($"Validation Error on: {propertyName} | The value was more than the maximum value.", error.errorMessage);
-        Assert.Equal(propertyName, error.property);
-    }
-
-    private void ValidatePass(ValidationResult result)
-    {
-        Assert.False(result.HasErrors);
-        Assert.Empty(result.Errors);
+        var validation = AttributeValidator.Validate(model);
+        TestValidationHelper.ValidateFail(validation, "ValueDecimal");
     }
 }

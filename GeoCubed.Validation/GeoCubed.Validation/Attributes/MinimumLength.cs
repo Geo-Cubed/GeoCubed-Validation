@@ -1,4 +1,6 @@
-﻿namespace GeoCubed.Validation.Attributes;
+﻿using System.Collections;
+
+namespace GeoCubed.Validation.Attributes;
 
 /// <summary>
 /// Validation attribute for checking the minimum length of an object.
@@ -6,7 +8,7 @@
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
 public class MinimumLength : BaseValidationAttribute
 {
-    private const string _defaultErrorMessage = "";
+    private const string _defaultErrorMessage = "The length was less than the minimum value.";
 
     private readonly int _minimumLength;
 
@@ -56,7 +58,7 @@ public class MinimumLength : BaseValidationAttribute
         }
         else
         {
-            length = ((Array)value).Length;
+            length = (value as IEnumerable).Cast<object>().Count();
         }
 
         return length >= this._minimumLength;
