@@ -7,8 +7,9 @@ namespace GeoCubed.Validation.Custom;
 /*
  * Rules:
  * Equal *
- * Greater than
- * Less than
+ * Greater than *
+ * Less than *
+ * string contains *
  * In the list
  * Length Greater than
  * length less than
